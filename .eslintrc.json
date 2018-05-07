@@ -2,6 +2,7 @@
     "extends": "airbnb-base",
     "rules": {
         "indent": ["error", 4],
-        "max-len": [2, {"code": 100, "tabWidth": 4, "ignoreUrls": true}]
+        "max-len": [2, {"code": 100, "tabWidth": 4, "ignoreUrls": true}],
+        "quotes": ["error", "double"]
     }
 }
