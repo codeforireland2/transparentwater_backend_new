@@ -1,8 +1,13 @@
 {
     "extends": "airbnb-base",
     "rules": {
-        "indent": ["error", 4],
-        "max-len": [2, {"code": 100, "tabWidth": 4, "ignoreUrls": true}],
-        "quotes": ["error", "double"]
+        "indent": ["error", 2],
+        "max-len": [2, {"code": 100, "tabWidth": 2, "ignoreUrls": true}],
+        "quotes": ["error", "single"],
+        "space-before-function-paren": "off",
+        "prefer-destructuring": "off",
+        "object-shorthand": "off",
+        "no-underscore-dangle": ["error", { "allowAfterThis": true }],
+        "comma-dangle": ["error", "never"]
     }
 }
