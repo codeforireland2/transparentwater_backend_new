@@ -49,3 +49,10 @@ node_modules/
 
 # MACOS sillyness
 .DS_Store
+src/APIServer/.idea/vcs.xml
+src/APIServer/.idea/misc.xml
+src/APIServer/.idea/modules.xml
+src/APIServer/.idea/APIServer.iml
+src/APIServer/.idea/jsLibraryMappings.xml
+src/APIServer/.idea/runConfigurations/bin_www.xml
+src/APIServer/.idea/workspace.xml
