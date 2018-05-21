@@ -1,0 +1,51 @@
+{
+  "type": "FeatureCollection",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": 27359,
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -1.23,
+          44.44
+        ]
+      },
+      "properties": {
+        "OBJECTID": 1,
+        "WORKTYPE": null,
+        "TITLE": "Essential Maintenance Works - Dublin",
+        "STARTDATE": 1527980400000,
+        "ENDDATE": 1525388400000,
+        "CONTACTDETAILS": null,
+        "AFFECTEDPREMISES": null,
+        "TRAFFICIMPLICATIONS": null,
+        "DESCRIPTION": "Maintenance works",
+        "STATUS": "Open",
+        "CREATEDBY": null,
+        "CREATEDATE": null,
+        "LASTEDITOR": null,
+        "LASTUPDATE": null,
+        "GLOBALID": "d34db33f",
+        "APPROVALSTATUS": "Approved",
+        "LOCATION": "Dublin",
+        "PRIORITY": null,
+        "COUNTY": "Dublin",
+        "REFERENCENUM": "ABC1234",
+        "PROJECTNUMBER": null,
+        "BOILWATERNOTICE": 1,
+        "TRAFFICDISRUPTIONS": 1,
+        "POLLUTION": null,
+        "WATEROUTAGE": 1,
+        "DONOTDRINK": null,
+        "PROJECT": null
+      }
+    }
+  ]
+}
