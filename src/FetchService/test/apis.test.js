@@ -13,7 +13,7 @@ test('fetch: irish water service notices', () => { // eslint-disable-line no-und
   // mock setup
   const expected = [{
     OBJECTID: 1,
-    WORKTYP: null,
+    WORKTYPE: null,
     TITLE: 'Essential Maintenance Works - Dublin',
     CONTACTDETAILS: null,
     AFFECTEDPREMISES: null,
@@ -30,7 +30,7 @@ test('fetch: irish water service notices', () => { // eslint-disable-line no-und
     LAT: 44.44,
     NOTICETYPE: ['BOILWATERNOTICE', 'TRAFFICDISRUPTIONS', 'WATEROUTAGE']
   }];
-  const filePath = path.join(__dirname, '..', 'sample-in.json');
+  const filePath = path.join(__dirname, '../../..', 'test/sample-in.json');
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {
       console.error(err); // eslint-disable-line no-console
