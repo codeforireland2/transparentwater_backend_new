@@ -1,12 +1,12 @@
 {
   "dev": {
     "driver": "mongodb",
-    "database": "twdbdev",
+    "database": "TWdev",
     "host": "localhost"
   },
   "prod": {
     "driver": "mongodb",
-    "database": "twdb",
+    "database": "TWbackend",
     "host": "localhost"
   }
 }

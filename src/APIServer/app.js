@@ -3,11 +3,17 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
+var Promise = require("bluebird");
 
-// Routers
-var usersRouter = require('./routes/alerts');
+// Loading routers
+var noticesRouter = require('./routes/notices');
 
 var app = express();
+
+// DB connection
+var db = require('./model/db');
+var notice = require('./model/notice');
 
 // view engine setup
 // No views required yet
@@ -20,8 +26,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// Connecting routers
+app.use('/notices', noticesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
