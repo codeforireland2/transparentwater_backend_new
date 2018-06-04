@@ -1,9 +1,10 @@
-var request = require('supertest');
-var app = require('../app')
+const request = require('supertest');
+const app = require('../app');
+
 describe('Test GET all notices', () => {
-    test('Getting all notices', () => {
-        return request(app).get("/notices").then(response => {
-            fail("Not implemented yet");
-        })
-    });
-})
+  test('Getting all notices', () => request(app)
+    .get('/notices')
+    .then((response) => { // eslint-disable-line no-unused-vars
+      fail('Not implemented yet'); // eslint-disable-line no-undef
+    }));
+});

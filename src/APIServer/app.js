@@ -1,19 +1,19 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var mongoose = require('mongoose');
-var Promise = require("bluebird");
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const mongoose = require('mongoose'); // eslint-disable-line no-unused-vars
+const Promise = require('bluebird'); // eslint-disable-line no-unused-vars
 
 // Loading routers
-var noticesRouter = require('./routes/notices');
+const noticesRouter = require('./routes/notices');
 
-var app = express();
+const app = express();
 
 // DB connection
-var db = require('./model/db');
-var notice = require('./model/notice');
+const db = require('./model/db'); // eslint-disable-line no-unused-vars
+const notice = require('./model/notice'); // eslint-disable-line no-unused-vars
 
 // view engine setup
 // No views required yet
@@ -30,12 +30,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/notices', noticesRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
