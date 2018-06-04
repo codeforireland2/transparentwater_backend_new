@@ -1,3 +1,4 @@
+const Promise = require('bluebird'); // eslint-disable-line no-unused-vars
 const request = require('supertest');
 const app = require('../app');
 
