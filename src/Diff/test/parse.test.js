@@ -25,7 +25,7 @@ test('Diff: create keyed JSON tree', () => { // eslint-disable-line no-undef
   }];
 
   const expected = {
-    'ABC1234': {
+    ABC1234: {
       OBJECTID: 1,
       WORKTYP: null,
       TITLE: 'Essential Maintenance Works - Dublin',
@@ -46,14 +46,16 @@ test('Diff: create keyed JSON tree', () => { // eslint-disable-line no-undef
     }
   };
 
-  const parseFunction = function(input) {
-    let newObj = {};
-    input.forEach(function(i) {
+  function parseFunction(parseInput) {
+    const newObj = {};
+    parseInput.forEach((i) => {
       newObj[i.REFERENCENUM] = i;
     });
     return newObj;
   }
-  expect(parse.keyedTree(input, parseFunction)).toEqual(expected);
+
+  expect(parse.keyedTree(input, parseFunction)) // eslint-disable-line no-undef
+    .toEqual(expected);
 });
 
 test('Diff: create transaction', () => { // eslint-disable-line no-undef
@@ -61,43 +63,44 @@ test('Diff: create transaction', () => { // eslint-disable-line no-undef
   // JOB4 to be added
   // JOB2 to be modified
   // JOB3 to not show up at all
-  expectedTransaction = {
+  const expectedTransaction = {
     addEvents: [{
-      key: "JOB4",
+      key: 'JOB4',
       data: {
-        "TITLE": "Essential Maintenance Works - Leitrim",
-        "COUNTY": "Leitrim",
-        "REFERENCENUM": "JOB4",
-        "LAT": 53.926507006511,
-        "LONG": -8.0085297962951,
-        "NOTICETYPE": [
-          "WATEROUTAGE"
-        ] 
-      } 
+        TITLE: 'Essential Maintenance Works - Leitrim',
+        COUNTY: 'Leitrim',
+        REFERENCENUM: 'JOB4',
+        LAT: 53.926507006511,
+        LONG: -8.0085297962951,
+        NOTICETYPE: [
+          'WATEROUTAGE'
+        ]
+      }
     }],
     removeEvents: [{
-      key: "JOB1",
+      key: 'JOB1',
       data: null
     }],
     updateEvents: [{
-      key: "JOB2",
+      key: 'JOB2',
       data: {
-        "TITLE": "Essential Maintenance Works - Waterford",
-        "COUNTY": "Waterford",
-        "REFERENCENUM": "JOB2",
-        "PROJECT": null,
-        "LAT": 56,
-        "LONG": 78,
-        "NOTICETYPE": [
-          "WATEROUTAGE", "BOILNOTICE"
+        TITLE: 'Essential Maintenance Works - Waterford',
+        COUNTY: 'Waterford',
+        REFERENCENUM: 'JOB2',
+        PROJECT: null,
+        LAT: 56,
+        LONG: 78,
+        NOTICETYPE: [
+          'WATEROUTAGE', 'BOILNOTICE'
         ]
       }
     }]
-  }
+  };
+
   const oldFile = path.join(__dirname, '../../..', 'test/diff-sample-in-old.json');
   const newFile = path.join(__dirname, '../../..', 'test/diff-sample-in-new.json');
-  let oldData = JSON.parse(fs.readFileSync(oldFile, 'utf8'));
-  let newData = JSON.parse(fs.readFileSync(newFile, 'utf8'));
+  const oldData = JSON.parse(fs.readFileSync(oldFile, 'utf8'));
+  const newData = JSON.parse(fs.readFileSync(newFile, 'utf8'));
   const diffed = parse.getDiff(oldData, newData);
-  expect(diffed).toEqual(expectedTransaction);
+  expect(diffed).toEqual(expectedTransaction); // eslint-disable-line no-undef
 });
