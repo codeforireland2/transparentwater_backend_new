@@ -1,7 +1,8 @@
 const Promise = require('bluebird'); // eslint-disable-line no-unused-vars
 const request = require('supertest');
 const mongoose = require('mongoose');
-mongoose.Promise = require('bluebird');
+
+mongoose.Promise = Promise;
 const app = require('../app');
 const Notice = require('../model/notice');
 
@@ -23,15 +24,22 @@ describe('Test GET all notices', () => {
   });
   test('Inserting a test notice and testing getting whether we get a list of notices', (done) => {
     const newnotice = new Notice({ objectid: 123456789, worktype: 'testinsert' });
-    newnotice.save((err) => {
-      if (err) fail(`Insert error: ${err}`); // eslint-disable-line no-undef
-    });
-    request(app).get('/notice').then((response) => { // eslint-disable-line no-unused-vars
-      console.log(response.body);
-      expect(response.statusCode).toBe(200);
-      expect(response.body.length).toBeGreaterThan(1);
-      done(); // eslint-disable-line no-undef
-    });
-    // TODO: Delete the test notice
+    newnotice.save()
+      .then(() => {
+        request(app).get('/notice')
+          .then((response) => { // eslint-disable-line no-unused-vars
+            console.log(response.body);
+            expect(response.statusCode).toBe(200);
+            expect(response.body.length).toBeGreaterThanOrEqual(1);
+          }).then(() => {
+            Notice.deleteMany({ objectid: 123456789, worktype: 'testinsert' }, (err) => {
+              if (err) fail(`Delete error: ${err}`); // eslint-disable-line no-undef
+            }).then(() => {
+              done();
+            });
+          });
+      }, () => {
+        if (err) fail(`Insert error: ${err}`); // eslint-disable-line no-undef
+      });
   });
 });

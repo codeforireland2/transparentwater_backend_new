@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 
 /**
  * We define the MongoDB schema for the service notices here.
