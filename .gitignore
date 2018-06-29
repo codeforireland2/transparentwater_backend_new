@@ -51,18 +51,5 @@ node_modules/
 .DS_Store
 
 # WebStorm project files
-src/APIServer/.idea/vcs.xml
-src/APIServer/.idea/misc.xml
-src/APIServer/.idea/modules.xml
-src/APIServer/.idea/APIServer.iml
-src/APIServer/.idea/jsLibraryMappings.xml
-src/APIServer/.idea/runConfigurations/bin_www.xml
-src/APIServer/.idea/workspace.xml
-.idea/inspectionProfiles/Project_Default.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/transparentwater_backend_new.iml
-.idea/vcs.xml
-.idea/workspace.xml
-.idea/codeStyles/codeStyleConfig.xml
-.idea/codeStyles/Project.xml
+src/APIServer/.idea/
+.idea/

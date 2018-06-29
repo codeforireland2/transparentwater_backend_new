@@ -7,7 +7,6 @@ const Promise = require('bluebird'); // eslint-disable-line no-unused-vars
 const mongoose = require('mongoose');
 
 mongoose.Promise = Promise;
-// const viewEngine = require('express-json-views');
 
 // Load app
 const app = express();
@@ -15,20 +14,9 @@ const app = express();
 // Loading routers
 const noticesRouter = require('./routes/notices');
 
-// Set view engine, JSON (not in use yet)
-// See https://www.npmjs.com/package/express-json-views
-// app.engine('json', viewEngine());
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'json');
-
 // DB connection
 const db = require('./model/db'); // eslint-disable-line no-unused-vars
 const notice = require('./model/notice'); // eslint-disable-line no-unused-vars
-
-// view engine setup
-// No views required yet
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'pug');
 
 // Connecting routers
 app.use('/notice', noticesRouter);
@@ -52,7 +40,6 @@ app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
 
   // render the error page
   res.status(err.status || 500);
-  // res.render('error');
   res.send('{error: "Error"}');
 });
 
