@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const Promise = require('bluebird'); // eslint-disable-line no-unused-vars
 const mongoose = require('mongoose');
+
 mongoose.Promise = Promise;
 // const viewEngine = require('express-json-views');
 
