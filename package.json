@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose",
     "check": "npm run lint && npm run test",
     "lint": "./node_modules/.bin/eslint src"
   },
@@ -13,6 +13,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "axios-mock-adapter": "^1.15.0",
+    "fast-deep-equal": "^2.0.1",
     "global": "^4.3.2"
   },
   "devDependencies": {
