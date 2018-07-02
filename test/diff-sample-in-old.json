@@ -1,0 +1,33 @@
+{ 
+	"JOB1": {
+		"TITLE": "Essential Maintenance Works - Dublin",
+		"COUNTY": "Dublin",
+		"REFERENCENUM": "JOB1",
+		"LAT": 12,
+		"LONG": 34,
+		"NOTICETYPE": [
+			"WATEROUTAGE"
+		]
+	},
+	"JOB2": {
+	    "TITLE": "Essential Maintenance Works - Waterford",
+	    "COUNTY": "Waterford",
+	    "REFERENCENUM": "JOB2",
+	    "PROJECT": null,
+	    "LAT": 56,
+	    "LONG": 78,
+	    "NOTICETYPE": [
+			"WATEROUTAGE"
+	    ]
+	},
+	"JOB3": {
+		"TITLE": "Essential Maintenance Works - Waterford",
+		"COUNTY": "Waterford",
+		"REFERENCENUM": "JOB3",
+		"LAT": 52.305141507939,
+		"LONG": -7.4948703306578,
+		"NOTICETYPE": [
+			"WATEROUTAGE"
+		]
+	}
+}
