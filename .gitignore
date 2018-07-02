@@ -49,3 +49,7 @@ node_modules/
 
 # MACOS sillyness
 .DS_Store
+
+# WebStorm project files
+src/APIServer/.idea/
+.idea/

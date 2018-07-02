@@ -1,0 +1,25 @@
+{
+  "OBJECTID": 27359,
+  "WORKTYPE": null,
+  "TITLE": "Essential Maintenance Works - Dublin",
+  "STARTDATE": 1527980400000,
+  "ENDDATE": 1525388400000,
+  "CONTACTDETAILS": null,
+  "AFFECTEDPREMISES": null,
+  "TRAFFICIMPLICATIONS": null,
+  "DESCRIPTION": "<div>Step testing may cause supply disruptions to Esker and surrounding areas in Co. Dublin.<\/div><div><br \/><\/div><div>Works are scheduled to take place from 10pm on 3 May to 6am on 4 May.<\/div><div><br \/><\/div><div>If you need to contact us about this supply and service alert, please quote this unique alert reference number: SDU020974.<\/div>",
+  "STATUS": "Open",
+  "GLOBALID": "6ef7f192-d11c-49e0-9143-28f8d42c907d",
+  "APPROVALSTATUS": "Approved",
+  "LOCATION": "Esker",
+  "PRIORITY": null,
+  "COUNTY": "Dublin",
+  "REFERENCENUM": "SDU020974",
+  "PROJECTNUMBER": null,
+  "PROJECT": null,
+  "LAT": 53.35300230081,
+  "LONG": -6.4308421140861,
+  "NOTICETYPE": [
+    "WATEROUTAGE"
+  ]
+},

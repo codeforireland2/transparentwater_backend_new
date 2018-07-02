@@ -8,6 +8,10 @@
         "prefer-destructuring": "off",
         "object-shorthand": "off",
         "no-underscore-dangle": ["error", { "allowAfterThis": true }],
-        "comma-dangle": ["error", "never"]
+        "comma-dangle": ["error", "never"],
+        "no-console": 0
+    },
+    "env": {
+        "jest": true
     }
 }
