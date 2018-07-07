@@ -1,5 +1,5 @@
 language: node_js
-sudo: false
+sudo: true
 services:
   - mongodb
 
@@ -8,6 +8,9 @@ node_js:
 
 install:
   - yarn install
+
+before_script:
+  - sleep 15
 
 script:
   - npm run check
