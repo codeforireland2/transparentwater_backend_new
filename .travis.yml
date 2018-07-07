@@ -11,3 +11,6 @@ install:
 
 script:
   - npm run check
+
+addons:
+  hostname: mongo
