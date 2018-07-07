@@ -1,0 +1,16 @@
+version: "2"
+services:
+  tw-api:
+    container_name: tw-api
+    build: .
+    ports:
+      - "8080:8080"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"

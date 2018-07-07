@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --verbose",
     "check": "npm run lint && npm run test",
-    "lint": "./node_modules/.bin/eslint src"
+    "lint": "./node_modules/.bin/eslint src",
+    "start": "node ./src/APIServer/server.js"
   },
   "author": "",
   "license": "ISC",
