@@ -8,7 +8,7 @@ const Notice = require('../model/notice');
 
 describe('Test Mongoose database connection', () => {
   test('Test connection', (done) => {
-    mongoose.connect('mongodb://127.0.0.1/TWbackend').then(() => {
+    mongoose.connect('mongodb://mongo/TWbackend').then(() => {
       expect(mongoose.connection.readyState).toBe(1); // eslint-disable-line no-unused-vars
     });
     done(); // eslint-disable-line no-undef
