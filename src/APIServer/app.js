@@ -16,7 +16,7 @@ const noticesRouter = require('./routes/notices');
 
 // DB connection
 const db = require('./model/db'); // eslint-disable-line no-unused-vars
-const notice = require('./model/notice'); // eslint-disable-line no-unused-vars
+const notice = require('../Database/schema/notice'); // eslint-disable-line no-unused-vars
 
 // Connecting routers
 app.use('/notice', noticesRouter);

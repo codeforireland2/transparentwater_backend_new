@@ -9,7 +9,8 @@
         "object-shorthand": "off",
         "no-underscore-dangle": ["error", { "allowAfterThis": true }],
         "comma-dangle": ["error", "never"],
-        "no-console": 0
+        "no-console": 0,
+        "no-plusplus": "off"
     },
     "env": {
         "jest": true
