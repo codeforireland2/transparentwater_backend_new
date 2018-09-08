@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "jest": {
+     "testEnvironment": "node",
+     "testURL": "http://localhost/"
+  },
   "scripts": {
     "test": "jest --verbose",
     "check": "npm run lint && npm run test",

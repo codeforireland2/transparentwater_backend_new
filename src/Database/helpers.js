@@ -42,8 +42,34 @@ function lowercaseKeys(obj) {
   return newObj;
 }
 
+/*
+* normaliseData converts an object into one that more closely resembles
+* a notice
+*/
+function normaliseData(data) {
+  return data.map((d) => {
+    const newData = lowercaseKeys(d);
+    if ('lat' in newData || 'long' in newData) {
+      newData.geocoord = {
+        coordinates: [
+          newData.lat,
+          newData.long
+        ],
+        type: 'Point'
+      };
+      delete newData.lat;
+      delete newData.long;
+    }
+
+    if ('_id' in newData) {
+      delete newData._id; // eslint-disable-line no-underscore-dangle
+    }
+    return newData;
+  });
+}
 
 module.exports = {
   noticeFromDiff: noticeFromJSONDiff,
-  lowercaseKeys: lowercaseKeys
+  lowercaseKeys: lowercaseKeys,
+  normaliseData: normaliseData
 };

@@ -1,7 +1,7 @@
 const helpers = require('../helpers');
 
 test('Database: Notice from Diff', () => { // eslint-disable-line no-undef
-  // // mock setup
+  // mock setup
   const input = {
     OBJECTID: 1,
     WORKTYPE: null,

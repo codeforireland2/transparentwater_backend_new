@@ -1,70 +1,56 @@
-const mongoose = require('mongoose');
 const Notice = require('./schema/notice.js');
 
-const mongoURI = 'mongodb://mongo/TWbackend?replicaSet=rs';
 
 async function insertNotices(notices) {
-  mongoose.connect(mongoURI).then(() => {
-    Notice.collection.insert(notices, (err) => {
-      if (err) {
-        console.log(err);
-        process.exit();
-      }
-    });
-  }).catch((err) => {
-    console.log(err);
-    console.log('Could not connect to the database. Exiting now...');
-    process.exit();
+  await Notice.collection.insert(notices, (err) => {
+    if (err) {
+      console.log(err);
+      process.exit(1);
+    }
   });
 }
 
 async function getCurrentNotices(callback) {
-  mongoose.connect(mongoURI).then(() => {
-    Notice.find({}).lean().exec((err, result) => {
-      if (err) {
-        throw err;
-      }
-      callback(result);
-    });
+  await Notice.find({}).lean().exec((err, result) => {
+    if (err) {
+      console.log(err);
+      process.exit(1);
+    }
+    callback(result);
   });
 }
 
 async function deleteNotices(notices) {
-  mongoose.connect(mongoURI).then(() => {
-    Notice.remove({ referencenum: { $in: notices } }, (err) => {
+  await Notice.remove({ referencenum: { $in: notices } }, (err) => {
+    if (err) {
       console.log(err);
-      process.exit();
-    });
-  }).catch((err) => {
-    console.log(err);
-    process.exit();
+      process.exit(1);
+    }
   });
 }
 
 async function deleteAllNotices() {
-  mongoose.connect(mongoURI).then(() => {
-    Notice.remove({}, (err) => {
+  await Notice.remove({}, (err) => {
+    if (err != null) {
       console.log(err);
-      process.exit();
-    });
-  }).catch((err) => {
-    console.log(err);
-    process.exit();
+      process.exit(1);
+    }
   });
 }
 
 async function updateNotice(referenceNum, newVal) {
-  mongoose.connect(mongoURI).then(() => {
-    Notice.update(
-      { referencenum: referenceNum }, newVal, { upsert: true },
-      (err) => {
+  await Notice.update(
+    { referencenum: referenceNum },
+    newVal,
+    { overwrite: true },
+    (err) => {
+      if (err) {
         console.log(err);
-        process.exit();
+        process.exit(1);
       }
-    );
-  }).catch((err) => {
+    }
+  ).catch((err) => {
     console.log(err);
-    process.exit();
   });
 }
 
