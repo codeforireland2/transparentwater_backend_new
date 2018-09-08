@@ -42,7 +42,7 @@ test('Database: Handle fetch service functions', (done) => { // eslint-disable-l
   const secondData = JSON.parse(fs.readFileSync(secondDataFile, 'utf8'));
   const normaisedSecondData = helpers.normaliseData(secondData);
 
-  runDBTest(mongoURI, () => actions.getAllNotices(mongoURI, (d) => {
+  runDBTest(mongoURI, () => actions.getAllNotices(async (d) => {
     // tree structure for the older data
     const oldData = parse.keyedTree(d, parseFunction('referencenum'));
     // expect no data to previously exist
@@ -57,26 +57,25 @@ test('Database: Handle fetch service functions', (done) => { // eslint-disable-l
 
     if (diff.addEvents.length > 0) {
       const noticesToAdd = diff.addEvents.map(helpers.noticeFromDiff);
-      actions.insertNotices(mongoURI, noticesToAdd);
+      await actions.insertNotices(noticesToAdd);
     }
 
     if (diff.removeEvents.length > 0) {
       // remove all old notices
-      actions.deleteNotices(mongoURI, diff.removeEvents.map(k => k.key));
+      await actions.deleteNotices(diff.removeEvents.map(k => k.key));
     }
 
     if (diff.updateEvents.length > 0) {
-      diff.updateEvents.forEach((record) => {
+      await diff.updateEvents.forEach(async (record) => {
         // const noticeInstance = helpers.noticeFromDiff(record);
-        actions.updateNotice(mongoURI, record.referencenum, record);
+        await actions.updateNotice(record.referencenum, record);
       });
     }
-    actions.getAllNotices(mongoURI, (storedNotices) => {
+    await actions.getAllNotices(async (storedNotices) => {
       // expect 3 notices to currently exist
       expect(storedNotices.length).toBe(3);
       const normalisedStored = helpers.normaliseData(storedNotices);
       expect(normalisedStored).toEqual(normalisedFirstData);
-      // console.log(newd);
 
       // // repeat with newer data
       const storedData = parse.keyedTree(normalisedStored, parseFunction('referencenum'));
@@ -87,18 +86,18 @@ test('Database: Handle fetch service functions', (done) => { // eslint-disable-l
       expect(parsedDiff.updateEvents.length).toBe(1);
 
       if (parsedDiff.addEvents.length > 0) {
-        actions.insertNotices(mongoURI, parsedDiff.addEvents.map(helpers.noticeFromDiff));
+        await actions.insertNotices(parsedDiff.addEvents.map(helpers.noticeFromDiff));
       }
 
       if (parsedDiff.removeEvents.length > 0) {
         // remove all old notices
-        actions.deleteNotices(mongoURI, parsedDiff.removeEvents.map(k => k.key));
+        await actions.deleteNotices(parsedDiff.removeEvents.map(k => k.key));
       }
 
       if (parsedDiff.updateEvents.length > 0) {
-        parsedDiff.updateEvents.forEach((record) => {
+        await parsedDiff.updateEvents.forEach(async (record) => {
           const noticeInstance = helpers.noticeFromDiff(record);
-          actions.updateNotice(mongoURI, record.referencenum, noticeInstance);
+          await actions.updateNotice(record.referencenum, noticeInstance);
         });
       }
       done();
