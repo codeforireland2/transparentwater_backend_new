@@ -6,7 +6,7 @@ test('Diff: create keyed JSON tree', () => { // eslint-disable-line no-undef
   // // mock setup
   const input = [{
     OBJECTID: 1,
-    WORKTYP: null,
+    WORKTYPE: null,
     TITLE: 'Essential Maintenance Works - Dublin',
     CONTACTDETAILS: null,
     AFFECTEDPREMISES: null,
@@ -27,7 +27,7 @@ test('Diff: create keyed JSON tree', () => { // eslint-disable-line no-undef
   const expected = {
     ABC1234: {
       OBJECTID: 1,
-      WORKTYP: null,
+      WORKTYPE: null,
       TITLE: 'Essential Maintenance Works - Dublin',
       CONTACTDETAILS: null,
       AFFECTEDPREMISES: null,
@@ -40,8 +40,8 @@ test('Diff: create keyed JSON tree', () => { // eslint-disable-line no-undef
       LOCATION: 'Dublin',
       COUNTY: 'Dublin',
       REFERENCENUM: 'ABC1234',
-      LONG: -1.23,
       LAT: 44.44,
+      LONG: -1.23,
       NOTICETYPE: ['BOILWATERNOTICE', 'TRAFFICDISRUPTIONS', 'WATEROUTAGE']
     }
   };

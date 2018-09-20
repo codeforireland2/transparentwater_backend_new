@@ -53,6 +53,8 @@ node_modules/
 # MACOS sillyness
 .DS_Store
 
-# WebStorm project files
+# WebStorm and vscode project files
 src/APIServer/.idea/
 .idea/
+.vscode
+

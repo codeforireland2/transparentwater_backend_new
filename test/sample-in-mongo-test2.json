@@ -1,0 +1,32 @@
+[ 
+  	{
+	    "title": "Essential Maintenance Works - Leitrim",
+	    "county": "Leitrim",
+	    "referencenum": "JOB4",
+	    "lat": 53.926507006511,
+	    "long": -8.0085297962951,
+	    "noticetype": [
+			"WATEROUTAGE"
+	    ]
+	},
+	{
+	    "title": "Essential Maintenance Works - Waterford",
+	    "county": "Waterford",
+	    "referencenum": "JOB2",
+	    "lat": 56,
+	    "long": 78,
+	    "noticetype": [
+			"WATEROUTAGE", "BOILNOTICE"
+	    ]
+	},
+	{
+		"title": "Essential Maintenance Works - Waterford",
+		"county": "Waterford",
+		"referencenum": "JOB3",
+		"lat": 52.305141507939,
+		"long": -7.4948703306578,
+		"noticetype": [
+			"WATEROUTAGE"
+		]
+	}
+]

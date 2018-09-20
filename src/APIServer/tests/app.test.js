@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 
 mongoose.Promise = Promise;
 const app = require('../app');
-const Notice = require('../model/notice');
+const Notice = require('../../Database/schema/notice');
 
 describe('Test Mongoose database connection', () => {
   test('Test connection', (done) => {

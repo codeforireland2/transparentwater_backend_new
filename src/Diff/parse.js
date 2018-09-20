@@ -1,4 +1,4 @@
-const util = require('util');
+const equal = require('deep-equal');
 // this module needs to access the database and get old data
 // needs to select which are adds and which are updates etc
 // for the Irish water API there's a clear key field
@@ -23,10 +23,13 @@ class TransactionEvents {
   }
 
   addRemoveEvent(key) {
-    this.removeEvents.push({
-      key: key,
-      data: null
-    });
+    // sometimes an undefined key makes it in here. I'm not sure why yet
+    if (key !== undefined && key !== 'undefined') {
+      this.removeEvents.push({
+        key: key,
+        data: null
+      });
+    }
   }
 
   addAddEvent(key, value) {
@@ -78,7 +81,21 @@ function createTransactionDiff(oldData, newData) {
 
     // at this point there's a potential that the values differ
     if (oldData[k] && newData[k]) {
-      if (!util.isDeepStrictEqual(oldData[k], newData[k])) {
+      const oldKeys = Object.getOwnPropertyNames(oldData[k]).sort();
+      const newKeys = Object.getOwnPropertyNames(newData[k]).sort();
+      let eq = true;
+
+      if (equal(oldKeys, newKeys)) {
+        for (let i = 0; i < newKeys.length; i++) {
+          const prop = newKeys[i];
+          eq = equal(oldData[k][prop], newData[k][prop]);
+          if (!eq) {
+            break;
+          }
+        }
+      }
+
+      if (!eq) {
         transaction.addUpdateEvent(k, newData[k]);
       }
     }
