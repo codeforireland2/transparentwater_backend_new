@@ -6,7 +6,7 @@ const parse = require('../../Diff/parse');
 const Notice = require('../schema/notice.js');
 const mongoose = require('mongoose');
 
-const mongoURI = 'mongodb://127.0.0.1:27017/TWbackendTest';
+const testMongoURI = 'mongodb://127.0.0.1:27017/TWbackendTest';
 
 function parseFunction(keyAttr) {
   return (parseInput) => {
@@ -42,7 +42,7 @@ test('Database: Handle fetch service functions', (done) => { // eslint-disable-l
   const secondData = JSON.parse(fs.readFileSync(secondDataFile, 'utf8'));
   const normaisedSecondData = helpers.normaliseData(secondData);
 
-  runDBTest(mongoURI, () => actions.getAllNotices(async (d) => {
+  runDBTest(testMongoURI, () => actions.getAllNotices(async (d) => {
     // tree structure for the older data
     const oldData = parse.keyedTree(d, parseFunction('referencenum'));
     // expect no data to previously exist

@@ -1,0 +1,28 @@
+FROM node:10
+
+# Create app directory
+WORKDIR /usr/src/FetchService
+
+COPY package*.json ./
+RUN npm install
+
+# Bundle app source
+COPY . .
+
+# Expose port
+EXPOSE 9000
+
+## add a job to cron
+#ADD ./src/FetchService/crontab /etc/cron.d/fetch-cron
+#
+#RUN chmod 0644 /etc/cron.d/fetch-cron
+#RUN chmod 0644 /usr/src/FetchService/src/FetchService/index.js
+#
+#RUN touch /var/log/cron.log
+#
+##Install Cron
+#RUN apt-get update
+#RUN apt-get -y install cron
+
+# Run the command on container startup
+CMD ["node", "./src/FetchService/index.js", "--daily"]

@@ -1,4 +1,4 @@
-version: "2"
+version: "2.1"
 services:
   tw-api:
     container_name: tw-api
@@ -9,7 +9,8 @@ services:
     links:
       - mongo
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
   mongo:
     container_name: mongo
     image: mongo
@@ -17,3 +18,21 @@ services:
       - ./mongodata:/data/db
     ports:
       - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongo", "--eval", "\"db.runCommand('ping').ok\""] 
+  tw-fetch:
+    container_name: tw-fetch
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-FetchService
+    volumes:
+      - .:/usr/src/FetchService
+    tty: true
+    ports:
+      - "9000:9000"
+    links:
+      - mongo
+    depends_on:
+      mongo:
+        condition: service_healthy
