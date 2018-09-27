@@ -65,8 +65,6 @@ function normaliseData(data) {
     if ('_id' in newData) {
       delete newData._id; // eslint-disable-line no-underscore-dangle
     }
-    console.log("NEW DATA");
-    console.log(newData);
     return newData;
   });
 }
