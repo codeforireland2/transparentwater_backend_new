@@ -6,6 +6,7 @@ const Notice = require('./schema/notice');
 */
 function noticeFromJSONDiff(jn) {
   const n = new Notice();
+  n._id = jn.data.referencenum; // eslint-disable-line no-underscore-dangle
   n.geocoord = { type: 'Point', coordinates: [jn.data.lat, jn.data.long] };
   n.objectid = jn.data.objectid;
   n.title = jn.data.title;
@@ -64,6 +65,8 @@ function normaliseData(data) {
     if ('_id' in newData) {
       delete newData._id; // eslint-disable-line no-underscore-dangle
     }
+    console.log("NEW DATA");
+    console.log(newData);
     return newData;
   });
 }

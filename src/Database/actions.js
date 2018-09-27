@@ -40,7 +40,7 @@ async function deleteAllNotices() {
 
 async function updateNotice(referenceNum, newVal) {
   await Notice.update(
-    { referencenum: referenceNum },
+    { _id: newVal._id }, // eslint-disable-line no-underscore-dangle
     newVal,
     { overwrite: true },
     (err) => {
