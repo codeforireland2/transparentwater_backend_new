@@ -142,3 +142,4 @@ if (options.interval) {
     process.exit();
   });
 }
+
