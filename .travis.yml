@@ -13,7 +13,7 @@ before_script:
   - sleep 15
 
 script:
-  - npm run check
+  - npm install && npm run check
 
 addons:
   hostname: mongo

@@ -1,8 +1,8 @@
 const request = require('axios');
 const urls = require('./urls.config');
 
-function fetchIrishWater(callback, errorCallback) {
-  const url = urls.irishWaterServiceNotices;
+function fetchIrishWater(callback: (Object) => any, errorCallback: (string) => any) {
+  const url: string = urls.irishWaterServiceNotices;
   request.get(url)
     .then((response) => {
       const data = response.data;

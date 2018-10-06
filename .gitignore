@@ -53,6 +53,12 @@ node_modules/
 # MACOS sillyness
 .DS_Store
 
+
+# compiled js files
+src/FetchService/*.js
+src/Diff/*.js
+*.js.map
+
 # WebStorm and vscode project files
 src/APIServer/.idea/
 .idea/
