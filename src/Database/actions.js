@@ -1,5 +1,4 @@
-const Notice = require('./schema/notice.js');
-
+const Notice = require('./schema/notice');
 
 async function insertNotices(notices) {
   await Notice.collection.insert(notices, (err) => {

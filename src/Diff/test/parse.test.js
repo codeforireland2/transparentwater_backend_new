@@ -24,7 +24,7 @@ test('Diff: create keyed JSON tree', () => { // eslint-disable-line no-undef
     NOTICETYPE: ['BOILWATERNOTICE', 'TRAFFICDISRUPTIONS', 'WATEROUTAGE']
   }];
 
-  const expected = {
+  const expected = [{
     ABC1234: {
       OBJECTID: 1,
       WORKTYPE: null,
@@ -44,17 +44,9 @@ test('Diff: create keyed JSON tree', () => { // eslint-disable-line no-undef
       LONG: -1.23,
       NOTICETYPE: ['BOILWATERNOTICE', 'TRAFFICDISRUPTIONS', 'WATEROUTAGE']
     }
-  };
+  }];
 
-  function parseFunction(parseInput) {
-    const newObj = {};
-    parseInput.forEach((i) => {
-      newObj[i.REFERENCENUM] = i;
-    });
-    return newObj;
-  }
-
-  expect(parse.keyedTree(input, parseFunction)) // eslint-disable-line no-undef
+  expect(parse.keyedTree('REFERENCENUM', input, null)) // eslint-disable-line no-undef
     .toEqual(expected);
 });
 
@@ -101,6 +93,6 @@ test('Diff: create transaction', () => { // eslint-disable-line no-undef
   const newFile = path.join(__dirname, '../../..', 'test/diff-sample-in-new.json');
   const oldData = JSON.parse(fs.readFileSync(oldFile, 'utf8'));
   const newData = JSON.parse(fs.readFileSync(newFile, 'utf8'));
-  const diffed = parse.getDiff(oldData, newData);
+  const diffed = parse.getDiff(oldData, newData).asObject();
   expect(diffed).toEqual(expectedTransaction); // eslint-disable-line no-undef
 });

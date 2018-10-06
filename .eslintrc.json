@@ -1,5 +1,6 @@
 {
     "extends": "airbnb-base",
+    "parser": "typescript-eslint-parser",
     "rules": {
         "indent": ["error", 2],
         "max-len": [2, {"code": 100, "tabWidth": 2, "ignoreUrls": true}],
@@ -10,7 +11,8 @@
         "no-underscore-dangle": ["error", { "allowAfterThis": true }],
         "comma-dangle": ["error", "never"],
         "no-console": 0,
-        "no-plusplus": "off"
+        "no-plusplus": "off",
+        "strict": "off"
     },
     "env": {
         "jest": true

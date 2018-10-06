@@ -4,13 +4,15 @@ const mongoose = require('mongoose');
 const winston = require('winston');
 
 const apis = require('./apis');
-const notice = require('../Database/schema/notice'); // eslint-disable-line no-unused-vars
+const _notice = require('../Database/schema/notice'); // eslint-disable-line no-unused-vars
 const actions = require('../Database/actions');
-const diffParser = require('../Diff/parse');
 const helpers = require('../Database/helpers');
 mongoose.Promise = require('bluebird');
 
-const mongoURI = 'mongodb://mongo/TWbackend';
+// typescript imports
+import * as diffParser from '../Diff/parse';
+
+const mongoURI = 'mongodb://mongo/TWbackend?replicaSet=primary';
 
 const msgFormat = winston.format.printf(info =>
   `${info.timestamp} [${info.label}] ${info.level}: ${info.message}`);
@@ -47,9 +49,10 @@ function logError(log, message) {
   // console.error(message);
 }
 
-function fetchAPIs(log) {
+function fetchAPIs(log: any) {
   return new Promise((resolve) => {
     apis.fetchIrishWater(((data) => { // eslint-disable-line no-unused-vars
+      console.log("running request")
       mongoose.connect(mongoURI, {
         // sets how many times to try reconnecting
         reconnectTries: Number.MAX_VALUE,
@@ -58,26 +61,46 @@ function fetchAPIs(log) {
       }).then(async () => {
         actions.getAllNotices(async (d) => {
           const normalisedIWData = helpers.normaliseData(data);
-          const oldData = diffParser.keyedTree(d, parseFunction('referencenum'));
-          const newData = diffParser.keyedTree(normalisedIWData, parseFunction('referencenum'));
-          const diff = diffParser.getDiff(oldData, newData);
+          const oldData = diffParser.createKeyedTree('referencenum', d, (input) => {
+            return helpers.lowercaseKeys(input);
+          });
+          const newData = diffParser.createKeyedTree('referencenum', normalisedIWData, (input) => {
+            const newData = helpers.lowercaseKeys(input);
+            if ('lat' in newData || 'long' in newData) {
+              newData.geocoord = {
+                coordinates: [
+                  newData.lat,
+                  newData.long
+                ],
+                type: 'Point'
+              };
+              delete newData.lat;
+              delete newData.long;
+            }
+
+            if ('_id' in newData) {
+              delete newData._id; // eslint-disable-line no-underscore-dangle
+            }
+            return newData;
+          });
+          const diff = diffParser.createTransactionDiff(oldData, newData);
           logInfo(log, 'Events found');
           logInfo(log, `add events: ${diff.addEvents.length}, ` +
                   `update events: ${diff.updateEvents.length}, ` +
-                  `remove events: ${diff.removeEvents.length}`);
+                  `remove events: ${diff.deleteEvents.length}`);
           if (diff.addEvents.length > 0) {
             await actions.insertNotices(diff.addEvents.map(helpers.noticeFromDiff));
           }
 
-          if (diff.removeEvents.length > 0) {
+          if (diff.deleteEvents.length > 0) {
             // remove all old notices
-            await actions.deleteNotices(diff.removeEvents.map(k => k.key));
+            await actions.deleteNotices(diff.deleteEvents.map(k => k.key));
           }
 
           if (diff.updateEvents.length > 0) {
             await diff.updateEvents.forEach(async (record) => {
               const noticeInstance = helpers.noticeFromDiff(record);
-              await actions.updateNotice(notice.referencenum, noticeInstance);
+              await actions.updateNotice(noticeInstance.referencenum, noticeInstance);
             });
           }
           logInfo(log, 'data written successfully');
@@ -85,7 +108,7 @@ function fetchAPIs(log) {
           resolve();
         });
       }).catch((err) => {
-        logError(err);
+        logError(logger, err);
       });
     }));
   });
